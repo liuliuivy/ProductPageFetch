@@ -20,6 +20,7 @@ app.post('/', function (req, res) {
 
 app.listen(port, () => console.log(`server started listen on port ${port}`));
 
+
 var parseRank = function (body) {
     const [rankWithPrefix = ''] = body.match(/#\d+(,|\d)*\sin?/) || [];
     const [rankString = ''] = rankWithPrefix.match(/\d+(,|\d)*/) || [];
