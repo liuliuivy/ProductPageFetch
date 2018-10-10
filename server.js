@@ -14,12 +14,17 @@ app.post('/', function (req, res) {
             const rank = parseRank(body);
             const category = parseCategory(body);
             const dimensions = parseDimensions(body);
-            res.json({ rank, category, dimensions });
-        })
+            if (rank === 0 && category === '' && dimensions === '') {
+                res.status(404).json({ success: false });
+            } else {
+                res.json({ rank, category, dimensions });
+            }
+        }).catch(() => {
+            res.status(404).json({ success: false });
+        });
 });
 
 app.listen(port, () => console.log(`server started listen on port ${port}`));
-
 
 var parseRank = function (body) {
     const [rankWithPrefix = ''] = body.match(/#\d+(,|\d)*\sin?/) || [];
